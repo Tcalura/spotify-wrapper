@@ -48,9 +48,22 @@ describe('Spotify Wrapper', () => {
       const artists = search();
 
       expect(fetchedStub).to.have.been.calledOnce;
+
+      fetchedStub.restore();
     });
 
+    it('should receive the correct url to fecth', () => {
+      const fetchedStub = sinon.stub(global, 'fetch');
 
+      const artists = search('Incubus', 'artists');
+      expect(fetchedStub).to.have.been
+        .calledWith('https://api.spotify.com/v1/search?q=Incubus&type=artists');
+
+      const albums = search('Incubus', 'album');
+      expect(fetchedStub).to.have.been
+        .calledWith('https://api.spotify.com/v1/search?q=Incubus&type=album');
+
+    });
 
   });
 });
