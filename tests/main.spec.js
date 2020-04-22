@@ -1,9 +1,9 @@
 import chai, { expect } from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
-import sinonStubPromise from 'sinon-stub-promise';
+// import sinonStubPromise from 'sinon-stub-promise';
 chai.use(sinonChai);
-sinonStubPromise(sinon);
+// sinonStubPromise(sinon);
 
 global.fetch = require('node-fetch');
 
@@ -45,6 +45,7 @@ describe('Spotify Wrapper', () => {
 
   beforeEach( () => {
     fetchedStub = sinon.stub(global, 'fetch');
+    fetchedStub.resolves({ body: 'json' });
   });
 
   afterEach( () => {
@@ -81,6 +82,16 @@ describe('Spotify Wrapper', () => {
 
 
       });
+    });
+
+    it('should return the JSON Data from then Promise', () => {
+      const artists = search('Incubus', 'artist');
+
+      console.log(artists.resolveValue);
+
+
+      expect(artists.resolveValue).to.be.eql({ body: 'json' });
+
     });
 
   });
