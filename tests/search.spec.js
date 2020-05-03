@@ -7,11 +7,11 @@ chai.use(sinonChai);
 
 global.fetch = require('node-fetch');
 
-import { search, searchAlbums, searchArtists, searchTracks, searchPlayLists } from '../src/main';
+import { search, searchAlbums, searchArtists, searchTracks, searchPlayLists } from '../src/search';
 import { FetchError } from 'node-fetch';
 
 
-describe('Spotify Wrapper', () => {
+describe('Search', () => {
 
   describe('smoke tests', () =>{
     // search (generico) - + de 1 tipo
